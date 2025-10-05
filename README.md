@@ -10,13 +10,7 @@ Este trabalho, desenvolvido no contexto da pós-graduação em *Ciência de Dado
 
 O *Pima Indians Diabetes Dataset* é um conjunto de dados público amplamente utilizado em aprendizado de máquina para problemas de classificação binária (diabéticos vs não-diabéticos). Ele contém informações de 768 mulheres Pima índias, povo indígena do sudoeste dos EUA, com 21 anos ou mais. Esse grupo tem sido foco de diversos estudos médicos devido à alta prevalência de obesidade e diabetes tipo 2 (não insulino-dependente) entre seus membros.
 
-<div align="center">
-  
-| ![Pima Indians Diabetes Database](/assets/povo-pima.png) |
-|:--:|
-| *Os Pima também são conhecidos como Akimel O'odham, que significa "povo do rio"* |
 
-</div>
 
 ### Mapeamento de Stakeholders
 
@@ -263,7 +257,7 @@ Para avaliar se o número de clusters definido (K = 2) é adequado, foi aplicada
   
 | ![Índice da Silhueta (Silhouette Score](/assets/silhouette-score-kmeans.png) |
 |:--:|
-| *Índice da Silhueta (Silhouette Score* |
+| *Índice da Silhueta (Silhouette Score)* |
 
 </div>
 
