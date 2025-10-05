@@ -173,13 +173,15 @@ Em resumo, o gráfico indica que a idade é um fator relevante no risco de diabe
 
 ## MODELAGEM
 
-Nesta etapa de modelagem, serão aplicados diferentes algoritmos de aprendizado de máquina ao Pima Indians Diabetes Dataset com o intuito de gerar insights sobre os padrões presentes nos dados. Serão utilizados métodos supervisionados e não-supervisionados, sendo eles Árvore de Decisão, K-Means e KNN (K-Nearest Neighbors).
+Nesta etapa de modelagem, serão aplicados diferentes algoritmos de **Machine Learning** ao **Pima Indians Diabetes Dataset** com o intuito de gerar insights sobre os padrões presentes nos dados. Serão utilizados dois métodos, um supervisionado (Árvore de Decisão) e outro não-supervisionado (K-Means).
 
 ### Árvore de Decisão (Decision Tree)
 
-Para o código, foi utilizada a biblioteca ```Scikit-learn```, que fornece o módulo ```DecisionTreeClassifier```, responsável pela construção, treinamento e avaliação da Árvore de Decisão. O modelo é treinado com parte dos dados (treino) e avaliado em dados novos (teste). A função ```train_test_split``` divide os dados de forma aleatória, mantendo a proporção das classes com o parâmetro ```stratify```, destinando 30% para teste e 70% para treino. O parâmetro ```random_state=42``` garante que a divisão seja sempre a mesma, sendo 42 apenas um número de referência.
+A **árvore de decisão** é um algoritmo de **aprendizado supervisionado** usado para classificação e regressão. Ela divide os dados em ramos com base nas variáveis mais relevantes, formando uma estrutura em forma de árvore. Cada divisão representa uma decisão, e as folhas finais indicam o resultado ou a previsão do modelo.
 
 #### Configuração da Árvore de Decisão
+
+Para o código, foi utilizada a biblioteca ```Scikit-learn```, que fornece o módulo ```DecisionTreeClassifier```, responsável pela construção, treinamento e avaliação da Árvore de Decisão. O modelo é treinado com parte dos dados (treino) e avaliado em dados novos (teste). A função ```train_test_split``` divide os dados de forma aleatória, mantendo a proporção das classes com o parâmetro ```stratify```, destinando 30% para teste e 70% para treino. O parâmetro ```random_state=42``` garante que a divisão seja sempre a mesma, sendo 42 apenas um número de referência.
 
 ```python
 # criação do modelo de árvore de decisão
@@ -231,5 +233,52 @@ A árvore de decisão divide os dados em etapas para separar os grupos “Diabé
 | **Histórico familiar alto (Pedigree alto)** | Aumenta bastante a chance de diabetes mesmo com glicose não tão alta. |
 
 ### K-Means
+
+O K-means é um algoritmo de aprendizado não supervisionado usado para agrupar dados semelhantes em K grupos (clusters). Ele funciona atribuindo cada ponto ao centro mais próximo e ajustando esses centros iterativamente até que os grupos fiquem estáveis. É considerado o algoritmo de clusterização mais simples e amplamente utilizado em **Machine Learning**, sendo ideal para descobrir padrões ou segmentos ocultos em conjuntos de dados sem rótulos.
+
+Para o código, foi utilizada a biblioteca ```Scikit-learn```, que fornece o módulo ```KMeans```, responsável pela realização da clusterização não supervisionada. Diferente dos modelos de classificação, o K-Means não utiliza rótulos (classes) durante o treinamento, pois seu objetivo é agrupar os dados com base em similaridades entre as variáveis. O modelo foi configurado para criar dois agrupamentos ```(n_clusters=2)```, e o parâmetro ```random_state=42``` foi definido para assegurar a reprodutibilidade dos resultados. Após o ajuste do modelo, cada amostra recebeu um rótulo de cluster, permitindo a visualização e análise dos grupos formados.
+
+#### Visualização do Resultado
+
+Para os agrupamentos, escolheu-se K = 2 porque o dataset naturalmente possui duas categorias (diabético e não diabético), e o objetivo é verificar se o K-Means consegue reproduzir essa separação de forma não supervisionada. Abaixo, é mostrado o gráfico de dispersão em função de duas variáveis importantes: glicose e índice de massa corporal.
+
+<div align="center">
+  
+| ![Gráfico de Dispersão do K-Means](/assets/k-means-scatterplot.png) |
+|:--:|
+| *K-Means Scatterplot com K = 2* |
+
+</div>
+
+
+O gráfico revela a formação de dois grupos principais:
+- Cluster 1 (roxo): agrupa indivíduos com valores mais baixos de glicose e BMI moderado, indicando um perfil mais próximo de pacientes sem diabetes ou com menor risco metabólico.
+- Cluster 2 (amarelo): agrupa indivíduos com níveis de glicose mais elevados e, em geral, maior índice de massa corporal, o que pode estar associado a um maior risco de diabetes.
+
+#### Validação
+
+Para avaliar se o número de clusters definido (K = 2) é adequado, foi aplicada a técnica de Índice da Silhueta (Silhouette Score).
+
+<div align="center">
+  
+| ![Índice da Silhueta (Silhouette Score](/assets/silhouette-score-kmeans.png) |
+|:--:|
+| *Índice da Silhueta (Silhouette Score* |
+
+</div>
+
+Interpretação do gráfico:
+- O eixo X (embaixo) é o número de clusters (K) testado, nesse caso indo de 2 até 8.
+- O eixo Y esquerdo mostra o *Silhouette Score* que é a linha azul.
+- A linha azul representa o *Silhouette Score* para cada número de clusters (K), o valor mostra o quão bem os pontos estão agrupados, pois quanto maior o *Silhouette Score*, melhor o agrupamento.
+- A linha verde ao fundo mostra o tempo que o algoritmo demorou para treinar *(fit time)*, ou seja, é apenas um indicador de desempenho computacional e não influencia na escolha do melhor K.
+
+**Resultado:** o gráfico mostra que o maior valor de *Silhouette Score* ocorre em K = 2, com pontuação 0.496. Depois desse ponto o *score* cai bastante, o que significa que os agrupamentos ficaram menos bem definidos à medida que aumentamos o número de clusters. Em resumo, o melhor K é aquele onde o *Silhouette Score* é máximo, porque significa que os grupos estão mais bem separados e coesos internamente. Nesse caso K = 2 realmente é o ideal.
+
+---
+
+## Informação Adicional
+
+O código completo pode ser conferido através do Google Colab neste repositório.
 
 
