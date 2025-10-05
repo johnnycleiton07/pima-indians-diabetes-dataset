@@ -1,14 +1,14 @@
 ###### PT
 
-# Aplicação de algoritmos de ML e análise exploratória no Pima Indians Diabetes Database
+# Aplicação de algoritmos de ML e análise exploratória no Pima Indians Diabetes Dataset
 
 JOHNNY CLEITON  |  JOSS TIMOTEO  |  RAPHAEL FEITOSA
 
-Este trabalho, desenvolvido no contexto da pós-graduação em *Ciência de Dados e Analytics*, investiga o uso do *Pima Indians Diabetes Database* como base para estudo aplicado em saúde. A pesquisa contempla mapeamento de stakeholders, inventário de dados e revisão de trabalhos relacionados, além de práticas fundamentais como pré-processamento, análise exploratória e visualização de dados. Por fim, são aplicados algoritmos de *machine learning*, com destaque para *K-Means* e *Árvore de Decisão*, visando a extração de padrões relevantes e a geração de *insights* que possam contribuir para a compreensão do diabetes.
+Este trabalho, desenvolvido no contexto da pós-graduação em *Ciência de Dados e Analytics*, investiga o uso do *Pima Indians Diabetes Dataset* como base para estudo aplicado em saúde. A pesquisa contempla mapeamento de stakeholders, inventário de dados e revisão de trabalhos relacionados, além de práticas fundamentais como pré-processamento, análise exploratória e visualização de dados. Por fim, são aplicados algoritmos de *machine learning*, com destaque para *K-Means* e *Árvore de Decisão*, visando a extração de padrões relevantes e a geração de *insights* que possam contribuir para a compreensão do diabetes.
 
 ## BACKGROUND
 
-O *Pima Indians Diabetes Database* é um conjunto de dados público amplamente utilizado em aprendizado de máquina para problemas de classificação binária (diabéticos vs não-diabéticos). Ele contém informações de 768 mulheres Pima índias, povo indígena do sudoeste dos EUA, com 21 anos ou mais. Esse grupo tem sido foco de diversos estudos médicos devido à alta prevalência de obesidade e diabetes tipo 2 (não insulino-dependente) entre seus membros.
+O *Pima Indians Diabetes Dataset* é um conjunto de dados público amplamente utilizado em aprendizado de máquina para problemas de classificação binária (diabéticos vs não-diabéticos). Ele contém informações de 768 mulheres Pima índias, povo indígena do sudoeste dos EUA, com 21 anos ou mais. Esse grupo tem sido foco de diversos estudos médicos devido à alta prevalência de obesidade e diabetes tipo 2 (não insulino-dependente) entre seus membros.
 
 <div align="center">
   
@@ -20,7 +20,7 @@ O *Pima Indians Diabetes Database* é um conjunto de dados público amplamente u
 
 ### Mapeamento de Stakeholders
 
-No contexto do *Pima Indians Diabetes Database* e de um trabalho em Ciência de Dados, o mapeamento de *stakeholders* identifica as partes interessadas ou impactadas pelo estudo, ou seja, os “atores” mais relevantes para o projeto, como pacientes, profissionais de saúde e pesquisadores, entre outros.
+No contexto do *Pima Indians Diabetes Dataset* e de um trabalho em Ciência de Dados, o mapeamento de *stakeholders* identifica as partes interessadas ou impactadas pelo estudo, ou seja, os “atores” mais relevantes para o projeto, como pacientes, profissionais de saúde e pesquisadores, entre outros.
 
 <div align="center">
   
@@ -32,7 +32,7 @@ No contexto do *Pima Indians Diabetes Database* e de um trabalho em Ciência de 
 
 ### Inventário de Dados
 
-Esse levantamento permite organizar e documentar todas as fontes de dados disponíveis, incluindo o *Pima Indians Diabetes Database*, estatísticas de saúde pública, registros populacionais e estudos acadêmicos relacionados ao diabetes.
+Esse levantamento permite organizar e documentar todas as fontes de dados disponíveis, incluindo o *Pima Indians Diabetes Dataset*, estatísticas de saúde pública, registros populacionais e estudos acadêmicos relacionados ao diabetes.
 
 - [Diabetes Health Indicators Dataset - BRFSS](https://archive.ics.uci.edu/dataset/891/cdc+diabetes+health+indicators)
 - [Diabetes around the world in 2024 - IDF](https://idf.org/about-diabetes/diabetes-facts-figures/)
@@ -40,7 +40,7 @@ Esse levantamento permite organizar e documentar todas as fontes de dados dispon
 
 ### Trabalhos Relacionados
 
-A análise de trabalhos relacionados permite contextualizar o estudo dentro da literatura existente, identificando abordagens, metodologias e resultados já aplicados ao *Pima Indians Diabetes Database* e a outros conjuntos de dados sobre diabetes.
+A análise de trabalhos relacionados permite contextualizar o estudo dentro da literatura existente, identificando abordagens, metodologias e resultados já aplicados ao *Pima Indians Diabetes Dataset* e a outros conjuntos de dados sobre diabetes.
 
 - [Building Risk Prediction Models for Type 2 Diabetes Using Machine Learning Techniques](https://pubmed.ncbi.nlm.nih.gov/31538566/)
 - [A Comparative Study of Diabetes Detection Using The Pima Indian Diabetes Database](https://www.researchgate.net/publication/374730950_A_COMPARATIVE_STUDY_OF_DIABETES_DETECTION_USING_THE_PIMA_INDIAN_DIABETES_DATABASE)
@@ -168,4 +168,68 @@ O que se observa:
 - A dispersão é maior entre os diagnosticados com diabetes, mas fica evidente que a idade elevada está mais associada à presença da doença.
 
 Em resumo, o gráfico indica que a idade é um fator relevante no risco de diabetes, com maior prevalência em pessoas mais velhas.
+
+
+
+## MODELAGEM
+
+Nesta etapa de modelagem, serão aplicados diferentes algoritmos de aprendizado de máquina ao Pima Indians Diabetes Dataset com o intuito de gerar insights sobre os padrões presentes nos dados. Serão utilizados métodos supervisionados e não-supervisionados, sendo eles Árvore de Decisão, K-Means e KNN (K-Nearest Neighbors).
+
+### Árvore de Decisão (Decision Tree)
+
+Para o código, foi utilizada a biblioteca ```Scikit-learn```, que fornece o módulo ```DecisionTreeClassifier```, responsável pela construção, treinamento e avaliação da Árvore de Decisão. O modelo é treinado com parte dos dados (treino) e avaliado em dados novos (teste). A função ```train_test_split``` divide os dados de forma aleatória, mantendo a proporção das classes com o parâmetro ```stratify```, destinando 30% para teste e 70% para treino. O parâmetro ```random_state=42``` garante que a divisão seja sempre a mesma, sendo 42 apenas um número de referência.
+
+#### Configuração da Árvore de Decisão
+
+```python
+# criação do modelo de árvore de decisão
+clf = DecisionTreeClassifier(
+    criterion="gini",
+    max_depth=3,
+    min_samples_leaf=20,
+    random_state=42
+)
+```
+
+
+- `criterion="gini"` → a árvore usa o **índice de Gini** (ou, alternativamente, "entropy") para medir a impureza do nó.  
+- `max_depth=3` → limita a árvore a 3 níveis, evitando complexidade excessiva.  
+- `min_samples_leaf=20` → cada folha precisa ter pelo menos 20 exemplos, prevenindo overfitting.
+
+#### Índice de Gini
+
+O **índice de Gini** mede o quão misturado está um nó; e é calculado como:
+
+$$
+Gini = 1 - \sum_{i=1}^{n} p_i^2
+$$
+
+onde $$p_i$$ é a proporção de elementos da classe $$i$$ no nó. Quanto mais próximo de 0, mais puro é o nó; quanto mais próximo de 1, mais misturado estão os dados.
+
+#### Visualização da Árvore
+
+<div align="center">
+  
+| ![Árvore de Decisão (Decision Tree)](/assets/arvore-de-decisao.png) |
+|:--:|
+| *Árvore de Decisão (Decision Tree)* |
+
+</div>
+
+- `feature <= valor` → condição de decisão
+- `gini` → medida de impureza (0 = puro, 0.5 = misto)
+- `samples` → quantos exemplos chegaram até esse nó
+- `value = [a, b]` → número de amostras das classes [Não Diabético, Diabético]
+- `class = ...` → decisão da árvore naquele nó
+
+A árvore de decisão divide os dados em etapas para separar os grupos “Diabético” e “Não Diabético”. Ela começa avaliando o nível de glicose, o fator mais determinante, e depois refina a decisão com idade, IMC e histórico familiar. Cada nó mostra como o modelo reduz a incerteza até chegar às folhas, onde estão as previsões finais. Os tons alaranjados representam não diabéticos e os tons azulados, diabéticos — quanto mais escura a cor, mais certa é a classificação. Além disso, a idade se mostrou um divisor claro, pois nenhum indivíduo com menos de "27,5" anos foi classificado como diabético, deixando todo esse ramo da árvore composto apenas por nós com resultados “Não Diabético”.
+
+| Padrão | Interpretação |
+|------------|----------------|
+| **Alta glicose** | É o fator mais decisivo → indica fortemente diabetes. |
+| **Baixa glicose + baixo BMI + jovem** | Quase sempre não diabético. |
+| **Histórico familiar alto (Pedigree alto)** | Aumenta bastante a chance de diabetes mesmo com glicose não tão alta. |
+
+### K-Means
+
 
